@@ -27131,6 +27131,10 @@ var _User = require('./User');
 
 var _User2 = _interopRequireDefault(_User);
 
+var _axios = require('axios');
+
+var _axios2 = _interopRequireDefault(_axios);
+
 var _requestsReq = require('../requests/Req');
 
 var Users = (function (_React$Component) {
@@ -27151,9 +27155,27 @@ var Users = (function (_React$Component) {
         value: function componentDidMount() {
             var _this = this;
 
-            (0, _requestsReq.getPeople)().then(function (results) {
-                _this.setState({
-                    users: results.data.results
+            _axios2['default'].get('http://swapi.co/api/people').then(function (results) {
+                var all = results.data.results;
+                // this.setState({
+                //     users: results.data.results
+                // })
+                _axios2['default'].get('http://swapi.co/api/people/?page=2').then(function (results) {
+                    var all2 = results.data.results;
+                    _axios2['default'].get('http://swapi.co/api/people/?page=3').then(function (results) {
+                        var all3 = results.data.results;
+                        _axios2['default'].get('http://swapi.co/api/people/?page=4').then(function (results) {
+                            var all4 = results.data.results;
+                            _axios2['default'].get('http://swapi.co/api/people/?page=5').then(function (results) {
+                                var all5 = results.data.results;
+
+                                var con = all.concat(all2, all3, all4, all5);
+                                _this.setState({
+                                    users: con
+                                });
+                            });
+                        });
+                    });
                 });
             });
         }
@@ -27186,7 +27208,7 @@ exports['default'] = Users;
 exports['default'] = Users;
 module.exports = exports['default'];
 
-},{"../requests/Req":258,"./User":254,"react":252}],257:[function(require,module,exports){
+},{"../requests/Req":258,"./User":254,"axios":1,"react":252}],257:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -27268,15 +27290,14 @@ var _axios = require('axios');
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var getPeople = function getPeople() {
-    return _axios2['default'].get('http://swapi.co/api/people');
-};
+// let getPeople = () => {
+//     return axios.get('http://swapi.co/api/people')
+// }
 
 var getPerson = function getPerson(id) {
     return _axios2['default'].get('http://swapi.co/api/people/' + id);
 };
 
-exports.getPeople = getPeople;
 exports.getPerson = getPerson;
 
 },{"axios":1}]},{},[253])
