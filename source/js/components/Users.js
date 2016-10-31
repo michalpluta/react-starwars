@@ -36,6 +36,14 @@ export default class Users extends React.Component{
                 })
             })
         })
+
+        // let data = {}
+        // for (let i = 1; i <= 5; i++) {
+        //     axios.get('http://swapi.co/api/people/?page=' + i).then((results) => {
+        //         data[i] = results.data.results;
+        //         console.log(data);
+        //     });
+        // }
     }
 
     render(){
